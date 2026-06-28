@@ -47,7 +47,25 @@ function updateStars() {
         }
     }
 }
+const button = document.getElementById("valentinesButton");
 
+button.addEventListener("click", () => {
+  if (button.textContent === "Click Me! ❤") {
+    button.textContent = "loading...";
+    fetch('send_mail.php')
+      .then(response => {
+        if (response.ok) {
+          button.textContent = "";
+        } else {
+          console.error('Failed to send email');
+          button.textContent = "Error 😞";
+        }
+      })
+      .catch(error => {
+        // Handle network errors or other issues
+        console.error('Error:', error);
+        button.textContent = "Error 😞";
+      });
 
   }
 });
